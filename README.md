@@ -1,6 +1,5 @@
 # Task Management API
 
-<<<<<<< HEAD
 This is a RESTful API for a Task Management application, built with Java and Spring Boot.
 
 ## Features
