@@ -129,13 +129,13 @@ public class TaskServiceTest {
         savedTask2.setStatus(TaskStatus.COMPLETED);
         savedTask2.setCreatedOn(LocalDateTime.now());
 
-        List<Task> savedTasks = List.of(savedTask1, savedTask2);
+        List<Task> savedTasks = List.of(savedTask2);
 
         Pageable pageable = PageRequest.of(0, 10);
         Page<Task> page = new PageImpl<>(savedTasks, pageable, savedTasks.size());
         when(taskManagementRepository.findByStatus(TaskStatus.COMPLETED,pageable)).thenReturn(page);
 
-        Page<Task> responseTasks= taskManagementService.getTasks(null,pageable);
+        Page<Task> responseTasks= taskManagementService.getTasks(TaskStatus.COMPLETED,pageable);
         assertNotNull(responseTasks);
         assertEquals(1, responseTasks.getTotalElements());
         assertEquals("taskName1", responseTasks.getContent().get(0).getTaskName());
